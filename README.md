@@ -1,3 +1,78 @@
+# Laravel-Webapp-Task
+This is a web application build on laravel with php, for 2 user roles where one user can enter in information to a profile and an admin user can manage user profiles.
+
+For this app we have a user profile with 2 role authorities, mutant and xmen where both can upload 2 images (before and after image) and write a description of their powers to be displayed on their profiles. The other role is the admin role where admins can also create profiles and manage users, managing users lets an admin edit their roles, where he admin can assign the role of xmen to a mutant or vice versa and even grant an user the admin role. Admins can also delete users. 
+
+Getting Started:
+
+This project uses laravel version 7.12.0, composer version 1.10.6, php version 7.4.6 and MySQL version 8.0, no local webhost was used. Ensure that php extensions in the php.ini are active, extensions curl, fileinfo,gd2,intl,openssl,mysql, are active in your php directory, the php.ini is also provided int the repository.
+
+Deployment:
+
+To begin, access the xmen folder directory via cmd and run your text editer (In my case i used Atom) once the file is loaded navigate to .env file and change the settings to match the database you are using, i have used mysql with given database name as xmen and set a password. Ensure you execute a database named xmen in your database manager and remove/change the password from the .env file as you please.
+Now we must migrate the databases from the laravel project to the database, do this by running 
+```
+php artisan migrate
+```
+NOTE: You will get an error saying "Class 'CreateForeignKeysForUserTable' not found" and "PHP Warning:  Unterminated comment starting line 27 in PATH", ignore this as i have commented out the foreign key table because we are using seeders to populate the database and truncate method to build the query, therefore we run into an error when trying to populate the foreign key table when seeding. The purpose of the foreign key table if for database integrity and scalability for future development of the application, for now its not necessary for our demonstration.
+
+Once the databases have been migrated, now its time to populate the database using seeders, i have already created some seeders which are in the project folder, to run this enter in the cmd 
+```
+php artisan db:seed
+```
+This will populate the database with 3 user entries, 1 admin, 1 xmen and 1 mutant user, the login information goes as follow:
+
+Admin User,
+email:admin@xmen.com,
+password:password
+  
+Xmen User,
+email:user@xmen.com,
+password:password
+   
+Mutant User,
+email:user@mutant.com,
+password:password
+
+Testing:
+
+Now lets test the application by preforming a few basic tasks,
+If you sign in as the admin user using the previously mentioned login information you will notice that you gt taken to the user management page and you will be able to see all the current existing users with an edit and delete button next to each row. Clicking edit will take you to an edit page where as the admin you can change the user’s email, password and role ranging from admin, xmen and mutant.
+
+NOTE: The edit feature currently has an error where the database does not accept the role string, this will be fixed in the future.
+
+If you click delete it will remove the user from the database and from the lavaral project but if it’s an user from the seeder file it can be replaced by re-seeding the database.
+
+Now let’s log out as the admin and log in as another user, xmen or mutant by using the previously mentioned login information. You will notice that you are taken to a new home page where you can upload 2 images, a civilian image, a mutant image and a text area where you can write a short description of your powers. However, you cannot access the user management page as its only authorized to admins. 
+
+NOTE: There is an issue with uploading images where only mutant image upload area works but the civilian image does not appear however does get uploaded. 
+
+Now let’s register a new user, log out and navigate to the register button in the home page and sign up as a new user by entering new information.
+
+NOTE: You will run into an error where a role cannot be assigned, this is due to a bug in the code for assigning roles which is currently under investigation and is to be fixed.
+
+However, if you refresh the page you can sign in as the newly registered user and will be able to see the home page.
+
+Additional Notes:
+This is all for the application at the moment, but more features will be added once some of the mentioned bugs are fixed.
+Current features which i was not able to apply but will be applying are:
+1. Admin to be able to navigate the users page and view the content of the user page
+2. Users are to be able to send a request to the admin to have a role changed
+3. A notification is to be send to the user on the dashboard that the role of the user has been changed
+4. Users will be able to upload pictures apron registration if they desire 
+5. New tables are to be added to the database so there may be more integrity and scalability for future growth of the application
+
+Acknowledgment:
+
+I would like to thank Fonseka Innovations for giving the opportunity to learn php and laravel and look forward to hearing feedback based on my current task and application of my newly acquired knowledge.
+
+Thank you.
+
+
+
+
+
+
 <p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
 
 <p align="center">
